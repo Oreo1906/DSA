@@ -44,5 +44,22 @@ class Solution(object):
 
         return first
        
+# Here i this problem i am taking the first word of my given list "strs" and comparing its letters with other words of string.
+# Simple approach with no much complex thinking
+# Complexity (m*n)
+# Thought of worst scenes and solutions too which were damnn horrifying :)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
