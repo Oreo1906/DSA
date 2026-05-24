@@ -61,4 +61,6 @@ class Solution(object):
 
         return count
 
-
+#since here it is possible that the sequence starts with minus "-" sign or "+" positive sign so first we calculate diff
+#then consider edge cases always in each and every sum
+#then analyze the sum and solve it
