@@ -36,8 +36,8 @@ class Solution(object):
             guess = (guess + x // guess) // 2
         return guess
 
-        #                                                  x
-        #new guess =    old guess + ----------
-        #                                           old guess
+        #                               x
+        # new guess  =  old guess + ----------
+        #                            old guess
         #              	 ----------------------
-        #                          	       2
+        #                          2
