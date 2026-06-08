@@ -59,3 +59,5 @@ class Solution(object):
         for i in range(m+n):
             print(i)
             nums1[i] = third[i]
+
+#O((m+n)log(m+n)) is better for larger ranges
