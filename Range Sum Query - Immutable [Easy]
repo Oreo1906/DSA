@@ -1,0 +1,19 @@
+class NumArray(object):
+
+    def __init__(self, nums):
+        """
+        :type nums: List[int]
+        """
+        # build prefix sums for efficiency
+        self.prefix = [0]
+        for num in nums:
+            self.prefix.append(self.prefix[-1] + num)
+
+    def sumRange(self, left, right):
+        """
+        :type left: int
+        :type right: int
+        :rtype: int
+        """
+        # subtract two prefix sums to get range sum
+        return self.prefix[right + 1] - self.prefix[left]
