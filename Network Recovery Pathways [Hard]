@@ -1,0 +1,92 @@
+class Solution(object):
+    def findMaxPathScore(self, edges, online, k):
+        """
+        :type edges: List[List[int]]
+        :type online: List[bool]
+        :type k: int
+        :rtype: int
+        """
+        n = len(online)
+         # ----------------------------
+        # Step 1 : Build Graph
+        # ----------------------------
+
+        graph = defaultdict(list)
+
+        maxEdge = 0
+
+        for u, v, cost in edges:
+
+            graph[u].append((v, cost))
+
+            maxEdge = max(maxEdge, cost)
+
+        # ----------------------------
+        # Step 2 : Check Function
+        # ----------------------------
+
+        def canTravel(limit):
+
+            dist = [float("inf")] * n
+
+            dist[0] = 0
+
+            heap = []
+
+            heapq.heappush(heap, (0, 0))
+            # (current_cost, node)
+
+            while heap:
+
+                currentCost, node = heapq.heappop(heap)
+
+                if currentCost > dist[node]:
+                    continue
+
+                if node == n - 1:
+                    return currentCost <= k
+
+                for nextNode, edgeCost in graph[node]:
+
+                    # Ignore small edges
+                    if edgeCost < limit:
+                        continue
+
+                    # Ignore offline intermediate nodes
+                    if nextNode != n - 1 and not online[nextNode]:
+                        continue
+
+                    newCost = currentCost + edgeCost
+
+                    if newCost < dist[nextNode]:
+
+                        dist[nextNode] = newCost
+
+                        heapq.heappush(heap, (newCost, nextNode))
+
+            return False
+
+        # ----------------------------
+        # Step 3 : Binary Search
+        # ----------------------------
+
+        low = 0
+        high = maxEdge
+
+        answer = -1
+
+        while low <= high:
+
+            mid = (low + high) // 2
+
+            if canTravel(mid):
+
+                answer = mid
+
+                low = mid + 1
+
+            else:
+
+                high = mid - 1
+
+        return answer
